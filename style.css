@@ -14,8 +14,6 @@ body {
     position: absolute;
     display: flex;
     flex-wrap: wrap;
-    width: 100vw;
-    height: 100vh;
     overflow: hidden;
 }
 
@@ -36,5 +34,5 @@ body {
 }
 
 #debugGrid {
-    /* display: none; */
+    display: none;
 }

@@ -7,8 +7,11 @@ const widthOutput = document.querySelector("#width");
 
 const gridContainer = document.querySelector("#gridContainer")
 
-function getWindowWidth() { return window.innerWidth; }
-function getWindowHeight() { return window.innerHeight; }
+function getWindowWidth() { return window.innerWidth * 1.1; }
+function getWindowHeight() { return window.innerHeight * 1.1; }
+
+gridContainer.style.height = `${getWindowHeight()}px`;
+gridContainer.style.width = `${getWindowWidth()}px`;
 
 function getGridResolution() {
     return {
@@ -53,12 +56,13 @@ dragElement(document.getElementById("gridContainer"));
 let x = 0;
 let y = 0;
 
-const xCord = document.querySelector("#xCord");
-const yCord = document.querySelector("#yCord");
+const coords = document.querySelector("#coords");
+
+function getXoffset() {return x % SQUARE_SIZE}
+function getYoffset() {return y % SQUARE_SIZE}
 
 function updateCords() {
-    xCord.innerText = x;
-    yCord.innerText = y;
+    coords.innerText = `x = ${Math.ceil(x / SQUARE_SIZE)}, y = ${Math.ceil(y / SQUARE_SIZE)}`;
 }
 
 function dragElement(elmnt) {
@@ -92,8 +96,8 @@ function dragElement(elmnt) {
         y += pos2;
         updateCords();
         // set the element's new position:
-        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        elmnt.style.top = (-getYoffset()) + "px";
+        elmnt.style.left = (-getXoffset()) + "px";
     }
 
     function closeDragElement() {
