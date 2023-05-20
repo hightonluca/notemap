@@ -1,4 +1,4 @@
-const SQUARE_SIZE = 20;
+const SQUARE_SIZE = 44;
 
 console.log(document.styleSheets[0].cssRules)
 
@@ -36,6 +36,7 @@ function createGrid() {
     const totalSquares = grid.x * grid.y
     console.log(totalSquares)
     for (const s of Array(totalSquares).keys()) {
+        // addSquare(s);
         addSquare("");
     }
 }
