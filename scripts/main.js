@@ -7,7 +7,7 @@ const widthOutput = document.querySelector("#width");
 
 const gridContainer = document.querySelector("#gridContainer")
 
-function getWindowWidth() { return window.innerWidth * 1.1; }
+function getWindowWidth() { return window.innerWidth * 1.2; }
 function getWindowHeight() { return window.innerHeight * 1.1; }
 
 gridContainer.style.height = `${getWindowHeight()}px`;
@@ -71,6 +71,8 @@ function dragElement(elmnt) {
     //move the DIV from anywhere inside the DIV:
     elmnt.onmousedown = dragMouseDown;
 
+    handleDragMobile();
+
     function dragMouseDown(e) {
         if (e.button === 1) {
             e = e || window.event;
@@ -104,5 +106,34 @@ function dragElement(elmnt) {
         // stop moving when mouse button is released:
         document.onmouseup = null;
         document.onmousemove = null;
+    }
+
+    function handleDragMobile() {
+        window.addEventListener('touchstart', e => {
+            e = e || window.event;
+            e.preventDefault();
+            // get the mouse cursor position at startup:
+            pos3 = e.touches[0].clientX;
+            pos4 = e.touches[0].clientY;
+            document.onmouseup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+        });
+    
+        window.addEventListener('touchmove', e => {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.touches[0].clientX;
+            pos2 = pos4 - e.touches[0].clientY;
+            pos3 = e.touches[0].clientX;
+            pos4 = e.touches[0].clientY;
+            x += pos1;
+            y += pos2;
+            updateCords();
+            // set the element's new position:
+            elmnt.style.top = (-getYoffset()) + "px";
+            elmnt.style.left = (-getXoffset()) + "px";
+        });
     }
 }
