@@ -9,6 +9,7 @@ body {
     overflow: hidden;
     background-color: #f6dfc9;
     margin: 0;
+    position: relative;
 }
 
 #gridContainer {
@@ -16,6 +17,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
+    z-index: -200;
 }
 
 .gridSquare {
@@ -36,4 +38,24 @@ body {
 
 #debugGrid {
     display: none;
+}
+
+.note {
+    background-color: #ff8;
+    z-index: 1000;
+    cursor: pointer;
+    border-radius: 16px;
+    position: absolute;
+    padding: 22px;
+    overflow: hidden;
+    font-size: 16px;
+    font-family: fantasy;
+    color: #875e11;
+    padding: 22px;
+}
+
+#noteContainer {
+    position: absolute;
+    display: flex;
+    z-index: -5;
 }

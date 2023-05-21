@@ -51,7 +51,9 @@ createGrid();
 reportWindowSize();
 
 // Make the DIV element draggable:
-dragElement(document.getElementById("gridContainer"));
+const noteContainer = document.querySelector("#noteContainer")
+
+makeScreenDraggable(gridContainer, noteContainer);
 
 let x = 0;
 let y = 0;
@@ -65,11 +67,11 @@ function updateCords() {
     coords.innerText = `x = ${Math.ceil(x / SQUARE_SIZE)}, y = ${Math.ceil(y / SQUARE_SIZE)}`;
 }
 
-function dragElement(elmnt) {
+function makeScreenDraggable(grid, notes) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     
     //move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
+    grid.onmousedown = dragMouseDown;
 
     handleDragMobile();
 
@@ -94,12 +96,18 @@ function dragElement(elmnt) {
         pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
+        drag()
+    }
+
+    function drag() {
         x += pos1;
         y += pos2;
         updateCords();
         // set the element's new position:
-        elmnt.style.top = (-getYoffset()) + "px";
-        elmnt.style.left = (-getXoffset()) + "px";
+        grid.style.top = (-getYoffset()) + "px";
+        grid.style.left = (-getXoffset()) + "px";
+        notes.style.top = (notes.offsetTop - pos2) + "px";
+        notes.style.left = (notes.offsetLeft - pos1) + "px";
     }
 
     function closeDragElement() {
@@ -128,12 +136,55 @@ function dragElement(elmnt) {
             pos2 = pos4 - e.touches[0].clientY;
             pos3 = e.touches[0].clientX;
             pos4 = e.touches[0].clientY;
-            x += pos1;
-            y += pos2;
-            updateCords();
-            // set the element's new position:
-            elmnt.style.top = (-getYoffset()) + "px";
-            elmnt.style.left = (-getXoffset()) + "px";
+            drag()
         });
     }
 }
+
+function createNote(note, noteContainer) {
+    const noteElmnt = document.createElement('div')
+    noteElmnt.className = "note"
+    noteElmnt.innerText = note.text
+    noteElmnt.style.top = (note.y * SQUARE_SIZE) + "px"
+    noteElmnt.style.left = (note.x * SQUARE_SIZE) + "px"
+    noteElmnt.style.width = (SQUARE_SIZE * (note.w || 3)) + "px"
+    noteElmnt.style.height = (SQUARE_SIZE * (note.h || 3)) + "px"
+    
+    noteElmnt.onclick = () => {
+        alert(note.text)
+    }
+
+    noteContainer.appendChild(noteElmnt)
+}
+
+function createNotes(noteContainer) {
+    const notes = [
+        {
+            text: "This is a note!",
+            x: 0,
+            y: 0,
+        },
+        {
+            text: "This is an even bigger note! sometime in the near future, notes will be resizable",
+            x: 5,
+            y: 5,
+            w: 5,
+            h: 5,
+        },
+        {
+            text: "This is a small ass note with a shitton of text, it will cut off at some point",
+            x: 0,
+            y: 5,
+            w: 1,
+            h: 1,
+        },
+        
+        
+    ]
+
+    for (const note of notes) {
+        createNote(note, noteContainer)
+    }
+}
+
+createNotes(noteContainer)
