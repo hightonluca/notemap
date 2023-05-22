@@ -19,11 +19,12 @@ body {
 }
 
 .gridSquare {
-    width: 0;
-    height: 0;
+    width: 2px;
+    height: 2px;
+    border-radius: 2px;
     margin-right: 40px;
     margin-bottom: 40px;
-    border: #e4ad98 2px solid;
+    border: #e4ad98 1px solid;
     font-size: 10px;
 }
 
