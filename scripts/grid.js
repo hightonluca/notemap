@@ -138,7 +138,7 @@ for (const squareN of neededSquares) {
 function createDebug() {
     const coord = document.createElement("div")
     coord.id = "debug"
-    coord.innerText = "Memes"
+    coord.innerText = "X, Y"
     return coord
 }
 
