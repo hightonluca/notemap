@@ -49,8 +49,7 @@ function createGrid() {
 
     ontouchstart = function (e) {
         e.preventDefault()
-        state.handlePos.x = e.touches[0].clientX
-        state.handlePos.y = e.touches[0].clientY
+        startMove(e.touches[0].clientX, e.touches[0].clientY)
     }
 
     ontouchmove = function (e) {
