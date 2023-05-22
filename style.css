@@ -8,8 +8,6 @@ body {
     touch-action: none;
     overflow: hidden;
     background-color: #f6dfc9;
-    margin: 0;
-    position: relative;
 }
 
 #gridContainer {
@@ -29,15 +27,17 @@ body {
     font-size: 10px;
 }
 
-.debug {
+#debug {
     position: absolute;
-    /* top: 0;
-    right: 12px; */
-    left: 10px;
+    top: 6px;
+    right: 6px;
+    font-size: large;
 }
 
-#debugGrid {
-    display: none;
+#noteContainer {
+    position: absolute;
+    display: flex;
+    z-index: -5;
 }
 
 .note {
@@ -46,16 +46,11 @@ body {
     cursor: pointer;
     border-radius: 16px;
     position: absolute;
-    padding: 22px;
     overflow: hidden;
     font-size: 16px;
     font-family: fantasy;
     color: #875e11;
-    padding: 22px;
-}
-
-#noteContainer {
-    position: absolute;
-    display: flex;
-    z-index: -5;
+    margin-top: 34px;
+    margin-left: 24px;
+    transition: all 10ms ease 0ms;
 }
