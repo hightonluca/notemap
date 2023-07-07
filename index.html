@@ -11,7 +11,7 @@
 <body>
     <div id="page">
         <h1>HIGHTON</h1>
-        <div id="click">hola :^D</div>
+        <div id="click">hola :D</div>
     </div>
 </body>
 </html>
@@ -22,6 +22,7 @@
         this.style.fontSize = `${fontsize}rem`
         if (fontsize > 3) {
             this.className = "spin"
+            this.innerText = "hola >:D"
         }
     }
 </script>
@@ -63,6 +64,10 @@
         animation-duration: 5000ms;
         animation-iteration-count: infinite;
         animation-timing-function: linear; 
+    }
+
+    #click:hover {
+        cursor: pointer;
     }
 
     @keyframes spin {
